@@ -1,2 +1,3 @@
 # Shooter
-My first game in SFML
+
+Simple game in SFML
