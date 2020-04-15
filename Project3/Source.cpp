@@ -14,6 +14,18 @@ int main() {
 				if (event.key.code == sf::Keyboard::O) {
 					myclass.togglecircle();
 				}
+				if (event.key.code == sf::Keyboard::W) {
+					myclass.togglemove('w'); // going up
+				}
+				if (event.key.code == sf::Keyboard::S) {
+					myclass.togglemove('s'); // going down
+				}
+				if (event.key.code == sf::Keyboard::A) {
+					myclass.togglemove('a'); //  going left
+				}
+				if (event.key.code == sf::Keyboard::D) {
+					myclass.togglemove('d'); // going right
+				}
 			}
 			if (event.type == sf::Event::Closed) {
 				window.close();

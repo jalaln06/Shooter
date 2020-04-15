@@ -10,6 +10,6 @@ public:
 	Game();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void togglecircle();
-
+	virtual void togglemove(char move);
 };
 #endif
