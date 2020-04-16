@@ -1,26 +1,20 @@
 #include "game.h"
+#include <iostream>
 
-Game::Game() : need_draw{false}, mycircle(40)
+Game::Game(const sf::Vector2f &initialScreenSize) : mycircle(40), screenSize{initialScreenSize}
 {
     mycircle.setFillColor(sf::Color::Cyan);
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    if (need_draw)
-    {
-        target.draw(mycircle);
-    }
-}
-
-void Game::toggleCircle()
-{
-    need_draw = !need_draw;
+    target.draw(mycircle);
 }
 
 void Game::moveShip(Movements dir, float step)
 {
     sf::Vector2f shift(0, 0);
+
     switch (dir)
     {
         case Movements::UP:
@@ -36,5 +30,16 @@ void Game::moveShip(Movements dir, float step)
             shift.x += step;
             break;
     }
-    mycircle.setPosition(mycircle.getPosition() + shift);
+
+    sf::Vector2f pos = mycircle.getPosition() + shift;
+    pos.x = std::max(std::min(pos.x, screenSize.x), 0.f);
+    pos.y = std::max(std::min(pos.y, screenSize.y), 0.f);
+    mycircle.setPosition(pos);
+    std::cout << mycircle.getPosition().x << "     " << mycircle.getPosition().y << '\n';
+}
+
+void Game::setBounds(float width, float height)
+{
+    screenSize.x = width;
+    screenSize.y = height;
 }

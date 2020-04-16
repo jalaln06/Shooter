@@ -1,12 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "game.h"
-
+#include <iostream>
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(400, 600), "Shooter");
     window.setFramerateLimit(60);
-
-    Game game{};
+    Game game(sf::Vector2f(window.getSize()));
 
     while (window.isOpen())
     {
@@ -17,16 +16,24 @@ int main()
             {
                 window.close();
             }
+            if(event.type== sf::Event::Resized){
+                float w = static_cast<float>(event.size.width);
+                float h = static_cast<float>(event.size.height);
+                window.setView(
+                        sf::View(
+                                sf::Vector2f(w / 2.0, h / 2.0),
+                                sf::Vector2f(w, h)
+                        )
+                );
+                game.setBounds(w,h);
+            }
             else if (event.type == sf::Event::KeyPressed)
             {
                 switch (event.key.code)
                 {
+
                     case sf::Keyboard::Escape:
                         window.close();
-                        break;
-
-                    case sf::Keyboard::O:
-                        game.toggleCircle();
                         break;
 
                     case sf::Keyboard::W:

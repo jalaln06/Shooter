@@ -15,15 +15,16 @@ enum class Movements
 class Game : public sf::Drawable
 {
 protected:
-    bool need_draw;
     sf::CircleShape mycircle;
+    sf::Vector2f screenSize;
 public:
-    Game();
+    explicit Game(const sf::Vector2f &initialScreenSize);
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-    void toggleCircle();
     void moveShip(Movements dir, float step = DEFAULT_STEP);
+
+    void setBounds(float width, float height);
 };
 
 #endif
