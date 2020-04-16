@@ -3,6 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 
+enum class Movements
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
 class Game : public sf::Drawable
 {
 protected:
@@ -13,9 +21,9 @@ public:
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-    void togglecircle();
+    void toggleCircle();
 
-    virtual void togglemove(char move);
+    void moveShip(Movements dir);
 };
 
 #endif
