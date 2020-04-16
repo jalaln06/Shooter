@@ -32,8 +32,8 @@ void Game::moveShip(Movements dir, float step)
     }
 
     sf::Vector2f pos = mycircle.getPosition() + shift;
-    pos.x = std::max(std::min(pos.x, screenSize.x), 0.f);
-    pos.y = std::max(std::min(pos.y, screenSize.y), 0.f);
+    pos.x = std::max(std::min(pos.x, screenSize.x), 0.0f);
+    pos.y = std::max(std::min(pos.y, screenSize.y), 0.0f);
     mycircle.setPosition(pos);
     std::cout << mycircle.getPosition().x << "     " << mycircle.getPosition().y << '\n';
 }
