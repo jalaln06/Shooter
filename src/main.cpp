@@ -26,27 +26,27 @@ int main()
                         break;
 
                     case sf::Keyboard::O:
-                        game.togglecircle();
+                        game.toggleCircle();
                         break;
 
                     case sf::Keyboard::W:
                     case sf::Keyboard::Up:
-                        game.togglemove('w');
+                        game.moveShip(Movements::UP);
                         break;
 
                     case sf::Keyboard::S:
                     case sf::Keyboard::Down:
-                        game.togglemove('s');
+                        game.moveShip(Movements::DOWN);
                         break;
 
                     case sf::Keyboard::A:
                     case sf::Keyboard::Left:
-                        game.togglemove('a');
+                        game.moveShip(Movements::LEFT);
                         break;
 
                     case sf::Keyboard::D:
                     case sf::Keyboard::Right:
-                        game.togglemove('d');
+                        game.moveShip(Movements::RIGHT);
                         break;
 
                     default:

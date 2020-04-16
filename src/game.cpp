@@ -13,33 +13,27 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     }
 }
 
-void Game::togglecircle()
+void Game::toggleCircle()
 {
     need_draw = !need_draw;
 }
 
-void Game::togglemove(char move)
+void Game::moveShip(Movements dir)
 {
-    sf::Vector2f pos;
-    switch (move)
+    sf::Vector2f pos = mycircle.getPosition();
+    switch (dir)
     {
-        case 'w':
-            pos = mycircle.getPosition();
+        case Movements::UP:
             mycircle.setPosition(pos.x, pos.y - 10);
             break;
-        case 's':
-            pos = mycircle.getPosition();
+        case Movements::DOWN:
             mycircle.setPosition(pos.x, pos.y + 10);
             break;
-        case 'a':
-            pos = mycircle.getPosition();
+        case Movements::LEFT:
             mycircle.setPosition(pos.x - 10, pos.y);
             break;
-        case 'd':
-            pos = mycircle.getPosition();
+        case Movements::RIGHT:
             mycircle.setPosition(pos.x + 10, pos.y);
-            break;
-        default:
             break;
     }
 }
