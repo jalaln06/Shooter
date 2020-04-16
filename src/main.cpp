@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "game.h"
 #include <iostream>
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(400, 600), "Shooter");
@@ -16,22 +17,16 @@ int main()
             {
                 window.close();
             }
-            if(event.type== sf::Event::Resized){
-                float w = static_cast<float>(event.size.width);
-                float h = static_cast<float>(event.size.height);
-                window.setView(
-                        sf::View(
-                                sf::Vector2f(w / 2.0, h / 2.0),
-                                sf::Vector2f(w, h)
-                        )
-                );
-                game.setBounds(w,h);
-            }
-            else if (event.type == sf::Event::KeyPressed)
+            if (event.type == sf::Event::Resized)
+            {
+                const float w = static_cast<float>(event.size.width);
+                const float h = static_cast<float>(event.size.height);
+                window.setView(sf::View(sf::Vector2f(w / 2.0f, h / 2.0f), sf::Vector2f(w, h)));
+                game.setBounds(w, h);
+            } else if (event.type == sf::Event::KeyPressed)
             {
                 switch (event.key.code)
                 {
-
                     case sf::Keyboard::Escape:
                         window.close();
                         break;
