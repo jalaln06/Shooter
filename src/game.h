@@ -2,6 +2,7 @@
 #define SHOOTER_GAME
 
 #include <SFML/Graphics.hpp>
+#include "constants.h"
 
 enum class Movements
 {
@@ -22,8 +23,7 @@ public:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     void toggleCircle();
-
-    void moveShip(Movements dir);
+    void moveShip(Movements dir, float step = DEFAULT_STEP);
 };
 
 #endif

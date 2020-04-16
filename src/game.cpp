@@ -18,22 +18,23 @@ void Game::toggleCircle()
     need_draw = !need_draw;
 }
 
-void Game::moveShip(Movements dir)
+void Game::moveShip(Movements dir, float step)
 {
-    sf::Vector2f pos = mycircle.getPosition();
+    sf::Vector2f shift(0, 0);
     switch (dir)
     {
         case Movements::UP:
-            mycircle.setPosition(pos.x, pos.y - 10);
+            shift.y -= step;
             break;
         case Movements::DOWN:
-            mycircle.setPosition(pos.x, pos.y + 10);
+            shift.y += step;
             break;
         case Movements::LEFT:
-            mycircle.setPosition(pos.x - 10, pos.y);
+            shift.x -= step;
             break;
         case Movements::RIGHT:
-            mycircle.setPosition(pos.x + 10, pos.y);
+            shift.x += step;
             break;
     }
+    mycircle.setPosition(mycircle.getPosition() + shift);
 }
