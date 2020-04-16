@@ -35,5 +35,6 @@ x64/
 [rR]elease/
 [dD]ebug/
 *.user
+.vs/
 cmake-build-*/
 .idea/
