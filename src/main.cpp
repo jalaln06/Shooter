@@ -2,11 +2,24 @@
 #include "game.h"
 #include <iostream>
 
+const char *title = "Shooter";
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(400, 600), "Shooter");
+    sf::VideoMode origin = sf::VideoMode::getDesktopMode();
+    sf::VideoMode hd = *std::find_if(
+            std::begin(sf::VideoMode::getFullscreenModes()),
+            std::end(sf::VideoMode::getFullscreenModes()),
+            [&origin](const sf::VideoMode& mode){
+                return mode.width == 1280 && mode.height == 720 && mode.bitsPerPixel == origin.bitsPerPixel;
+            }
+    );
+
+    sf::RenderWindow window(origin, title);
     window.setFramerateLimit(60);
     Game game(sf::Vector2f(window.getSize()));
+    sf::CircleShape c(10);
+    c.setFillColor(sf::Color::Red);
 
     while (window.isOpen())
     {
@@ -17,18 +30,17 @@ int main()
             {
                 window.close();
             }
-            if (event.type == sf::Event::Resized)
-            {
-                const float w = static_cast<float>(event.size.width);
-                const float h = static_cast<float>(event.size.height);
-                window.setView(sf::View(sf::Vector2f(w / 2.0f, h / 2.0f), sf::Vector2f(w, h)));
-                game.setBounds(w, h);
-            } else if (event.type == sf::Event::KeyPressed)
+            else if (event.type == sf::Event::KeyPressed)
             {
                 switch (event.key.code)
                 {
                     case sf::Keyboard::Escape:
                         window.close();
+                        break;
+
+                    case sf::Keyboard::F:
+                        window.close();
+                        window.create(hd, title);
                         break;
 
                     case sf::Keyboard::W:
@@ -59,6 +71,7 @@ int main()
 
         window.clear();
         window.draw(game);
+        window.draw(c);
         window.display();
     }
 
