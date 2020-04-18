@@ -1,23 +1,31 @@
+#include <iostream>
+#include <cmath>
 
 #include "fps.h"
 
-void FpsCounter::draw(sf::RenderTarget &target, sf::RenderStates states) const
+FpsCounter::FpsCounter() : m_fps{0}, m_frames{0}
 {
-    target.draw(m_fpsHelpText);
+    if (!m_font.loadFromFile("Cousine-Regular.ttf"))
+    {
+        std::cout << "Font not loaded!\n";
+    }
+    m_fpsText.setFont(m_font);
+    m_fpsText.setCharacterSize(16);
+    m_fpsText.setFillColor(sf::Color::White);
+    m_fpsText.setOutlineThickness(2);
+
+    m_timer.restart();
 }
 
-void FpsCounter::update()
+void FpsCounter::draw(sf::RenderTarget &target)
 {
-
-}
-
-FpsCounter::FpsCounter()
-{
-//    m_fpsHelpText.move(5,5);
-    m_fpsHelpText.setCharacterSize(16);
-    m_fpsHelpText.setPosition(100,100);
-    m_fpsHelpText.setOutlineColor(sf::Color::Green);
-    m_fpsHelpText.setString("FPS: ");
-    m_fpsHelpText.setFillColor(sf::Color::White);
-    m_fpsHelpText.setOutlineThickness(2);
+    std::string fps = std::to_string(static_cast<unsigned int>(
+            std::round(++m_frames / m_timer.getElapsedTime().asSeconds())));
+    if (m_frames > 1000)
+    {
+        m_frames = 0;
+        m_timer.restart();
+    }
+    m_fpsText.setString("FPS: " + fps);
+    target.draw(m_fpsText);
 }

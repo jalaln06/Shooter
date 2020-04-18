@@ -3,21 +3,18 @@
 
 #include "SFML/Graphics.hpp"
 
-class FpsCounter : public sf::Drawable
+class FpsCounter
 {
 public:
     FpsCounter();
-
-    void update();
-
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    void draw(sf::RenderTarget &target);
 
 private:
-    sf::Text m_fpsHelpText;
+    sf::Font m_font;
     sf::Text m_fpsText;
     sf::Clock m_timer;
     float m_fps;
+    int m_frames;
 };
-
 
 #endif //SHOOTER_FPS_H
