@@ -69,7 +69,7 @@ int main()
         }
 
         window.clear();
-        window.draw(game);
+        game.draw(window);
         window.display();
     }
 

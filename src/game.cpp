@@ -6,10 +6,10 @@ Game::Game(const sf::Vector2f &initialScreenSize) : mycircle(40), screenSize{ini
     mycircle.setFillColor(sf::Color::Cyan);
 }
 
-void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
+void Game::draw(sf::RenderTarget &target)
 {
     target.draw(mycircle);
-    target.draw(myCounter);
+    myCounter.draw(target);
 }
 
 void Game::moveShip(Movements dir, float step)

@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "constants.h"
 #include "fps.h"
+
 enum class Movements
 {
     UP,
@@ -12,7 +13,7 @@ enum class Movements
     RIGHT
 };
 
-class Game : public sf::Drawable
+class Game
 {
 protected:
     sf::CircleShape mycircle;
@@ -21,7 +22,7 @@ protected:
 public:
     explicit Game(const sf::Vector2f &initialScreenSize);
 
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    void draw(sf::RenderTarget &target);
 
     void moveShip(Movements dir, float step = DEFAULT_STEP);
 
