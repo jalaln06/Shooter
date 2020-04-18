@@ -6,8 +6,11 @@
 #define SHOOTER_ENEMY_H
 
 
-class enemy
+class Enemy
 {
+protected:
+    int health;
+    int damageOnImpact;
 
 };
 

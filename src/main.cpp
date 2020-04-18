@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include "game.h"
 #include <iostream>
-
+#include <ctime>
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(400, 600), "Shooter");
+    sf::RenderWindow window(sf::VideoMode(600, 600), "Shooter");
     window.setFramerateLimit(60);
     Game game(sf::Vector2f(window.getSize()));
 
