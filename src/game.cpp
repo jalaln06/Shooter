@@ -9,6 +9,7 @@ Game::Game(const sf::Vector2f &initialScreenSize) : mycircle(40), screenSize{ini
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(mycircle);
+    target.draw(myCounter);
 }
 
 void Game::moveShip(Movements dir, float step)

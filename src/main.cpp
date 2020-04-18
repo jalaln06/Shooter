@@ -14,13 +14,12 @@ int main()
                 return mode.width == 1280 && mode.height == 720 && mode.bitsPerPixel == origin.bitsPerPixel;
             }
     );
-
+    for(auto& mode:sf::VideoMode::getFullscreenModes()){
+        std::cout<<mode.width<<' '<<mode.height<<' '<<mode.bitsPerPixel<<'\n';
+    }
     sf::RenderWindow window(origin, title);
     window.setFramerateLimit(60);
     Game game(sf::Vector2f(window.getSize()));
-    sf::CircleShape c(10);
-    c.setFillColor(sf::Color::Red);
-
     while (window.isOpen())
     {
         sf::Event event{};
@@ -71,7 +70,6 @@ int main()
 
         window.clear();
         window.draw(game);
-        window.draw(c);
         window.display();
     }
 

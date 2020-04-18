@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "constants.h"
-
+#include "fps.h"
 enum class Movements
 {
     UP,
@@ -17,6 +17,7 @@ class Game : public sf::Drawable
 protected:
     sf::CircleShape mycircle;
     sf::Vector2f screenSize;
+    FpsCounter myCounter;
 public:
     explicit Game(const sf::Vector2f &initialScreenSize);
 
