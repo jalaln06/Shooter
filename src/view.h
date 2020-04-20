@@ -1,5 +1,5 @@
-#ifndef SHOOTER_GAME
-#define SHOOTER_GAME
+#ifndef SHOOTER_VIEW
+#define SHOOTER_VIEW
 
 #include <SFML/Graphics.hpp>
 #include "constants.h"
@@ -18,12 +18,11 @@ namespace shooter
     class View : public sf::Drawable, public Updateable
     {
     protected:
-        sf::CircleShape m_circle;
-        sf::Vector2f m_screenSize;
-        FpsCounter m_fpsCounter;
+        FpsCounter& m_fpsCounter;
+        const sf::Window& m_window;
 
     public:
-        explicit View(const sf::Vector2f &initialScreenSize);
+        View(const sf::Window& window, FpsCounter& counter );
 
         void update() override;
 

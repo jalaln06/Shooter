@@ -31,8 +31,7 @@ int main()
             if (event.type == sf::Event::Closed)
             {
                 window.close();
-            }
-            else if (event.type == sf::Event::KeyPressed)
+            } else if (event.type == sf::Event::KeyPressed)
             {
                 switch (event.key.code)
                 {
