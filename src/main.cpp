@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include "game.h"
+#include "view.h"
 #include <iostream>
 #include <ctime>
+
 const char *title = "Shooter";
 
 int main()
@@ -10,16 +11,18 @@ int main()
     sf::VideoMode hd = *std::find_if(
             std::begin(sf::VideoMode::getFullscreenModes()),
             std::end(sf::VideoMode::getFullscreenModes()),
-            [&origin](const sf::VideoMode& mode){
+            [&origin](const sf::VideoMode &mode)
+            {
                 return mode.width == 1280 && mode.height == 720 && mode.bitsPerPixel == origin.bitsPerPixel;
             }
     );
-    for(auto& mode:sf::VideoMode::getFullscreenModes()){
-        std::cout<<mode.width<<' '<<mode.height<<' '<<mode.bitsPerPixel<<'\n';
+    for (auto &mode:sf::VideoMode::getFullscreenModes())
+    {
+        std::cout << mode.width << ' ' << mode.height << ' ' << mode.bitsPerPixel << '\n';
     }
     sf::RenderWindow window(origin, title);
     window.setFramerateLimit(60);
-    Game game(sf::Vector2f(window.getSize()));
+    shooter::View view(sf::Vector2f(window.getSize()));
     while (window.isOpen())
     {
         sf::Event event{};
@@ -44,22 +47,22 @@ int main()
 
                     case sf::Keyboard::W:
                     case sf::Keyboard::Up:
-                        game.moveShip(Movements::UP);
+                        view.moveShip(shooter::Movements::UP);
                         break;
 
                     case sf::Keyboard::S:
                     case sf::Keyboard::Down:
-                        game.moveShip(Movements::DOWN);
+                        view.moveShip(shooter::Movements::DOWN);
                         break;
 
                     case sf::Keyboard::A:
                     case sf::Keyboard::Left:
-                        game.moveShip(Movements::LEFT);
+                        view.moveShip(shooter::Movements::LEFT);
                         break;
 
                     case sf::Keyboard::D:
                     case sf::Keyboard::Right:
-                        game.moveShip(Movements::RIGHT);
+                        view.moveShip(shooter::Movements::RIGHT);
                         break;
 
                     default:
@@ -68,8 +71,10 @@ int main()
             }
         }
 
+        view.update();
+
         window.clear();
-        game.draw(window);
+        window.draw(view);
         window.display();
     }
 
