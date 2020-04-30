@@ -1,15 +1,28 @@
-//
-// Created by Jalal on 29.04.2020.
-//
+
 
 #ifndef SHOOTER_GAME_VIEW_H
 #define SHOOTER_GAME_VIEW_H
 
+#include "view.h"
+#include <iostream>
 
-class game_view
+namespace shooter
 {
+    class GameView : public View
+    {
+    private:
+        sf::ConvexShape m_ship;
+    public:
+        explicit GameView(Game &game);
 
-};
+        void CreateShip();
 
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+        void update() override;
+
+        void processKey(sf::Event::KeyEvent const &key) override;
+    };
+}
 
 #endif //SHOOTER_GAME_VIEW_H

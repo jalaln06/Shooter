@@ -7,11 +7,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
-        src/enemy.cpp
         src/fps.cpp
         src/updateable.h
-        src/view.cpp
-        src/game.cpp src/game.h)
+        src/views/view.cpp
+        src/game.cpp src/game.h src/input_controller.cpp src/input_controller.h src/views/game_view.cpp src/views/game_view.h src/views/menu_view.cpp src/views/menu_view.h src/resource_manager.cpp src/resource_manager.h)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 

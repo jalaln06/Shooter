@@ -1,36 +1,28 @@
-#ifndef SHOOTER_VIEW
-#define SHOOTER_VIEW
+#ifndef SHOOTER_VIEW_H
+#define SHOOTER_VIEW_H
 
 #include <SFML/Graphics.hpp>
-#include "constants.h"
-#include "fps.h"
+
+#include "../updateable.h"
 
 namespace shooter
 {
-    enum class Movements
-    {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT
-    };
+    class Game;
 
     class View : public sf::Drawable, public Updateable
     {
     protected:
-        FpsCounter& m_fpsCounter;
-        const sf::Window& m_window;
+        const std::string m_title;
+        Game& m_game;
 
     public:
-        View(const sf::Window& window, FpsCounter& counter );
+        View(std::string_view title, Game& game);
 
-        void update() override;
+        ~View() override;
 
-        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+        virtual void processKey(sf::Event::KeyEvent const& key) = 0;
 
-        void moveShip(Movements dir, float step = DEFAULT_STEP);
-
-        void setBounds(float width, float height);
+        [[nodiscard]] std::string title() const;
     };
 }
 

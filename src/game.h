@@ -1,32 +1,42 @@
-
 #ifndef SHOOTER_GAME_H
 #define SHOOTER_GAME_H
 
-#include<unordered_map>
-#include "view.h"
 #include <memory>
+#include <unordered_map>
+
+#include <SFML/Graphics.hpp>
+
+#include "views/view.h"
+#include "fps.h"
 
 namespace shooter
 {
-    enum class Views
+    class GameState
     {
-        Game,
-        Menu
     };
 
-    class Game
+    class Game : public sf::Drawable, public Updateable
     {
     private:
-        std::unordered_map<Views, std::shared_ptr<View>> m_views;
-        std::shared_ptr<View> m_currentView;
+        sf::Window& m_window;
+        GameState m_state;
+        std::unique_ptr<View> m_currentView;
+        FpsCounter m_fpsCounter;
+
     public:
-        explicit Game(std::shared_ptr<View> view);
+        explicit Game(sf::Window& window);
 
-        void setView(Views views);
+        sf::Window& window();
+        GameState& state();
 
-        std::shared_ptr<View> view() const;
+        void processKey(sf::Event::KeyEvent const& key);
+
+        void update() override;
+
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+        void setView(std::unique_ptr<View> view);
     };
 }
 
-
-#endif //SHOOTER_GAME_H
+#endif

@@ -1,19 +1,19 @@
+
 #include "view.h"
+
 #include <iostream>
 
-
-shooter::View::View(const sf::Window &window, shooter::FpsCounter &counter) : m_window{window}, m_fpsCounter{counter}
+shooter::View::View(std::string_view title, Game& game)
+        : m_title{title}, m_game{game}
 {
-
 }
 
-
-void shooter::View::update()
+shooter::View::~View()
 {
-    m_fpsCounter.update();
+    std::cout << "Destroyed view " << title() << std::endl;
 }
 
-void shooter::View::draw(sf::RenderTarget &target, sf::RenderStates states) const
+std::string shooter::View::title() const
 {
-    target.draw(m_fpsCounter);
+    return m_title;
 }

@@ -1,15 +1,34 @@
-//
-// Created by Jalal on 29.04.2020.
-//
-
 #ifndef SHOOTER_MENU_VIEW_H
 #define SHOOTER_MENU_VIEW_H
 
+#include <functional>
 
-class menu_view
+#include "view.h"
+
+namespace shooter
 {
+    class MenuView : public View
+    {
+    private:
+        sf::Text m_titleText;
+        std::vector<sf::Text> m_choices;
+        std::vector<std::pair<std::wstring, std::function<void()>>> m_options;
+        int m_optionIndex;
+        sf::CircleShape m_arrow;
 
-};
+    public:
 
 
-#endif //SHOOTER_MENU_VIEW_H
+        explicit MenuView(Game &game);
+
+        void CreateArrow();
+
+        void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+        void update() override;
+
+        void processKey(sf::Event::KeyEvent const &key) override;
+    };
+}
+
+#endif
