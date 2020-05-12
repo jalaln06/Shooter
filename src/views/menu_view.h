@@ -14,14 +14,14 @@ namespace shooter
         std::vector<sf::Text> m_choices;
         std::vector<std::pair<std::wstring, std::function<void()>>> m_options;
         int m_optionIndex;
-        sf::CircleShape m_arrow;
+        sf::Text m_arrow;
 
     public:
 
 
         explicit MenuView(Game &game);
 
-        void CreateArrow();
+        void createArrow();
 
         void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 

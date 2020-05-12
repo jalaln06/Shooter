@@ -1,29 +1,40 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include "constants.h"
 #include "game.h"
 #include "input_controller.h"
+#include "util/resources_manager.h"
 
 int main()
 {
-    const char *title = "Shooter";
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), title, sf::Style::None); //Creating standard window with name title
-    window.setFramerateLimit(60);
-
-    shooter::Game game(window); // Initializing class game with our window
-    shooter::InputController input(window, game); // Sending window and game to the class that processes input
-
-    while (window.isOpen())
+    try
     {
-        sf::Event event{};
-        while (window.pollEvent(event)) // if something happened we process
+        shooter::ResourcesManager::init(RESOURCES_DIR);
+
+        sf::RenderWindow window(sf::VideoMode::getDesktopMode(), GAME_TITLE, sf::Style::None);
+        window.setFramerateLimit(100);
+
+        shooter::Game game(window);
+        shooter::InputController input(window, game);
+
+        while (window.isOpen())
         {
-            input.processEvent(event);
+            sf::Event event{};
+            while (window.pollEvent(event))
+            {
+                input.processEvent(event);
+            }
+
+            game.update();
+
+            window.clear();
+            window.draw(game);
+            window.display();
         }
-
-        game.update();
-
-        window.clear();
-        window.draw(game);
-        window.display();
+    }
+    catch (std::exception const& ex)
+    {
+        std::cout << ex.what() << std::endl;
     }
 
     return 0;
